@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="content-language" content="zh-CN">
+		<title>zjh自主学习</title>
+		<link rel="stylesheet" type="text/css" href="style.css" media="screen">
+		<!--[if IE]>
+			<link rel="stylesheet" type="text/css" href="ie.css" media="screen">
+		<![endif]-->
+		<link rel="stylesheet" type="text/css" href="lightbox.css" media="screen">
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/jquery.lightbox-0.5.pack.js"></script>
+		<script type="text/javascript" src="js/cufon-yui.js"></script>
+		<script type="text/javascript" src="js/Desyrel_400.font.js"></script>
+
+		<link rel="stylesheet" href="http://img.zjhwork.xyz/element.css">
+		<!-- import Vue before Element -->
+		<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+		<!-- import JavaScript -->
+		<script src="http://img.zjhwork.xyz/js/element.js"></script>
+
+		<script src="http://img.zjhwork.xyz/vue/axios.js"></script>
+
+		<!-- Cufon text replacement -->
+		<script type="text/javascript">
+			$(document).ready(function(){
+				Cufon.replace('#about .right ul li');
+				Cufon.replace('h2', { textShadow: '0 2px rgba(0, 0, 0, 0.15)' });
+				Cufon.replace('#social .right a', {hover:true});
+				Cufon.replace('#work .left h3', {hover:true});
+				Cufon.replace('h3', { textShadow: '0 2px rgba(0, 0, 0, 0.15)' });
+				Cufon.replace('#contactinfo'), {hover:true};
+			});
+		</script>
+		
+		<!-- jQuery lightbox -->
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$('#work .right a').lightBox();
+			});
+		</script>
+		
+		<!-- Navigation and Content effects -->
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$('.page').hide();
+				$('#navigation li:first').addClass('active').show();
+				$('.page:first').show();
+				
+				$('#navigation li').click(function(){
+					$('#navigation li').removeClass('active');
+					$(this).addClass('active');
+					
+					$('.page').hide();
+					var activeTab = $(this).find('a').attr('href');
+					$(activeTab).fadeIn('slow');
+					return false;
+				});
+			});
+		</script>
+
+	</head>
+	<body>
+	<div id="app">
+		<div id="pagewrap">
+			
+			<!-- Site header and navigation -->
+			<div id="header">
+				<ul id="navigation">
+					<li><a class="about" href="#about"><img src="images/icon-about.png" alt="About"></a></li>
+					<li><a class="work" href="#work">work</a></li>
+					<li><a class="social" href="#social"><img src="images/icon-social.png" alt="Social"></a></li>
+					<li><a class="contact" href="#contact"><img src="images/icon-contact.png" alt="Contact"></a></li>
+				</ul>
+			</div>
+
+			<!-- Site content -->
+
+			<div id="content">
+				<div id="about" class="page">
+					<div class="left">
+						<img :src="this.index.about.authorPhoto" alt="photo">
+					</div>
+					<div class="right">
+						<h2>{{this.index.about.titleFirst}}</h2>
+						<p>{{this.index.about.content}}</p>
+						<h3>{{this.index.about.titleSecond}}</h3>
+						<ul v-for="(v, index) in this.index.about.skills">
+							<li><img :src="v.src" :alt="v.text">{{v.text}}</li>
+						</ul>
+					</div>
+				</div>
+
+				<div id="work" class="page">
+					<div class="left" >
+						<img :src="this.index.work.description.picture" alt="Featured project">
+						<h3><a :href="this.index.work.description.href" target="_blank">{{this.index.work.description.title}}</a></h3>
+						<p>{{this.index.work.description.content}}</p>
+					</div>
+					<div class="right">
+						<p>{{index.work.right.description}}</p>
+						<div v-for="(x,key) in index.work.right.pictures">
+							<h3>{{x.title}}</h3>
+							<ul id="work01" v-for="(v,key) in x.pictures">
+								<li><a :href="v.href"><img :src="v.src" :alt="v.alt"></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+	
+				<div id="social" class="page">
+					<div class="left">
+						<p class="tweet-text">{{index.social.left.text}}</p>
+						<p class="tweet-meta"><a target="_blank" :href="index.social.left.link.href">{{index.social.left.link.text}}</a></p>
+					</div>
+					<div class="right">
+						<ul v-for="(v, key) in index.social.right.contacts">
+							<li :class="v.text"><a :href="v.href"><img :src="v.src" :alt="v.text"> {{v.text}}</a></li>
+						</ul>
+					</div>
+				</div>
+	
+				<div id="contact" class="page">
+					<div class="left">
+					<h3>{{index.contact.left.text}}</h3>
+						<form :method="index.contact.left.method" :action="index.contact.left.url">
+							<ul>
+								<div v-for="v in index.contact.left.inputs">
+									<li class="msgname"><label for="Name">{{v.showText}} </label><input type="text" :name="v.key" id="Name"></li>
+								</div>
+								<li><label for="Message">{{index.contact.left.textarea.showText}} </label><textarea :name="index.contact.left.textarea.key" id="Message" :rows=index.contact.left.textarea.rows :cols=index.contact.left.textarea.cols></textarea></li>
+								<li><input class="send" type="submit" name="submit" :value="index.contact.left.btn.text"></li>
+							</ul>
+						</form>
+					</div>
+					<div class="right">
+						<div v-for="v in index.contact.right.texts">
+							<p>{{v.text}}</p>
+						</div>
+						<div id="contactinfo">
+							<div v-for="v in index.contact.right.contacts.texts">
+								<p>{{v.text}}</p>
+							</div>
+							<p><a :href="index.contact.right.contacts.link.href">{{index.contact.right.contacts.link.showText}}</a></p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="footer">
+				<p>&copy; Copyright &copy;  2018-2021 www.zjhwork.xyz  All Rights Reserved.<br><a target="_blank" href="https://beian.miit.gov.cn/">蜀ICP备19014737号</a></p>
+			</div>
+		</div>
+	</div>
+</body>
+	<script type="text/javascript" src="./js/vue.js"></script>
+</html>

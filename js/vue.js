@@ -2,7 +2,6 @@ new Vue({
     el: '#app',
     data: function () {
         return {
-            message:"1111",
             index: {
                 about: {
                     authorPhoto: "images/author-photo.png",
@@ -170,25 +169,15 @@ new Vue({
     },
     mounted: function () {
         this.loadIndex()
+
     },
     methods: {
         loadIndex() {
-            this.message = "11111111";
-            // this.index.about.titleFirst = "1111111"
-            axios.get("http://zjhwork.xyz:9998/keymaps/current-version?key=index")
+             axios.get("http://zjhwork.xyz:9998/keymaps/current-version?key=index")
                 .then(response => {
-                    this.message = "11111111";
-                    this.index.about.titleFirst = "2"
                     let indexFromNet = JSON.parse(response.data.jsonValue);
                     this.$notify.success("refresh！")
-                    // this.index.about.titleFirst = "1111111"
-                    // // this.index = indexFromNet;
-                    // console.log(this.index)
-                    // console.log("--------------")
-                    // console.log(indexFromNet)
-                    // console.log("--------------")
-                    // console.log(this.index == indexFromNet)
-                    // this.index = JSON.parse(response.data.jsonValue);
+                    this.index = indexFromNet;
                 }).catch((error) => {
                 this.$notify.error(error.toString())
             })

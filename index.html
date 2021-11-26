@@ -28,12 +28,12 @@
 		<!-- Cufon text replacement -->
 		<script type="text/javascript">
 			$(document).ready(function(){
-				Cufon.replace('#about .right ul li');
-				Cufon.replace('h2', { textShadow: '0 2px rgba(0, 0, 0, 0.15)' });
-				Cufon.replace('#social .right a', {hover:true});
-				Cufon.replace('#work .left h3', {hover:true});
-				Cufon.replace('h3', { textShadow: '0 2px rgba(0, 0, 0, 0.15)' });
-				Cufon.replace('#contactinfo'), {hover:true};
+				// Cufon.replace('#about .right ul li');
+				// Cufon.replace('h2', { textShadow: '0 2px rgba(0, 0, 0, 0.15)' });
+				// Cufon.replace('#social .right a', {hover:true});
+				// Cufon.replace('#work .left h3', {hover:true});
+				// Cufon.replace('h3', { textShadow: '0 2px rgba(0, 0, 0, 0.15)' });
+				// Cufon.replace('#contactinfo'), {hover:true};
 			});
 		</script>
 		
@@ -86,10 +86,9 @@
 						<img :src="index.about.authorPhoto" alt="photo">
 					</div>
 					<div class="right">
-						{{message}}
 						<h2>{{index.about.titleFirst}}</h2>
 						<p>{{index.about.content}}</p>
-						<h3>{{index.about.titleSecond}}</h3>
+						<h3 v-text="index.about.titleSecond"></h3>
 						<ul v-for="(v, index) in index.about.skills">
 							<li><img :src="v.src" :alt="v.text">{{v.text}}</li>
 						</ul>
@@ -153,7 +152,7 @@
 			</div>
 
 			<div id="footer">
-				<p>&copy; Copyright &copy;  2018-2021 www.zjhwork.xyz  All Rights Reserved.<br><a target="_blank" href="https://beian.miit.gov.cn/">蜀ICP备19014737号</a></p>
+				<p>&copy; Copyright &copy;  2018-2021 www.zjhwork.xyz  All Rights Reserved.<br><a target="_blank" href="https://beian.miit.gov.cn/">蜀ICP备19014737号-1</a></p>
 			</div>
 		</div>
 	</div>

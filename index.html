@@ -15,12 +15,15 @@
 		<script type="text/javascript" src="js/Desyrel_400.font.js"></script>
 
 		<link rel="stylesheet" href="http://img.zjhwork.xyz/element.css">
+
+
 		<!-- import Vue before Element -->
 		<script src="https://cdn.jsdelivr.net/npm/vue"></script>
 		<!-- import JavaScript -->
 		<script src="http://img.zjhwork.xyz/js/element.js"></script>
 
 		<script src="http://img.zjhwork.xyz/vue/axios.js"></script>
+
 
 		<!-- Cufon text replacement -->
 		<script type="text/javascript">
@@ -80,13 +83,14 @@
 			<div id="content">
 				<div id="about" class="page">
 					<div class="left">
-						<img :src="this.index.about.authorPhoto" alt="photo">
+						<img :src="index.about.authorPhoto" alt="photo">
 					</div>
 					<div class="right">
-						<h2>{{this.index.about.titleFirst}}</h2>
-						<p>{{this.index.about.content}}</p>
-						<h3>{{this.index.about.titleSecond}}</h3>
-						<ul v-for="(v, index) in this.index.about.skills">
+						{{message}}
+						<h2>{{index.about.titleFirst}}</h2>
+						<p>{{index.about.content}}</p>
+						<h3>{{index.about.titleSecond}}</h3>
+						<ul v-for="(v, index) in index.about.skills">
 							<li><img :src="v.src" :alt="v.text">{{v.text}}</li>
 						</ul>
 					</div>
@@ -94,9 +98,9 @@
 
 				<div id="work" class="page">
 					<div class="left" >
-						<img :src="this.index.work.description.picture" alt="Featured project">
-						<h3><a :href="this.index.work.description.href" target="_blank">{{this.index.work.description.title}}</a></h3>
-						<p>{{this.index.work.description.content}}</p>
+						<img :src="index.work.description.picture" alt="Featured project">
+						<h3><a :href="index.work.description.href" target="_blank">{{index.work.description.title}}</a></h3>
+						<p>{{index.work.description.content}}</p>
 					</div>
 					<div class="right">
 						<p>{{index.work.right.description}}</p>
@@ -127,10 +131,10 @@
 						<form :method="index.contact.left.method" :action="index.contact.left.url">
 							<ul>
 								<div v-for="v in index.contact.left.inputs">
-									<li class="msgname"><label for="Name">{{v.showText}} </label><input type="text" :name="v.key" id="Name"></li>
+									<li class="msgname"><label for="Name">{{v.showText}} </label><input type="text" :name="v.key" v-model="v.bindValue" id="Name"></li>
 								</div>
-								<li><label for="Message">{{index.contact.left.textarea.showText}} </label><textarea :name="index.contact.left.textarea.key" id="Message" :rows=index.contact.left.textarea.rows :cols=index.contact.left.textarea.cols></textarea></li>
-								<li><input class="send" type="submit" name="submit" :value="index.contact.left.btn.text"></li>
+								<li><label >{{index.contact.left.textarea.showText}} </label><textarea v-model="index.contact.left.textarea.bindValue" :name="index.contact.left.textarea.key" id="Message" :rows=index.contact.left.textarea.rows :cols=index.contact.left.textarea.cols></textarea></li>
+								<li><input class="send" type="button" name="submit" @click="sendMsg" :value="index.contact.left.btn.text"></li>
 							</ul>
 						</form>
 					</div>
@@ -153,6 +157,7 @@
 			</div>
 		</div>
 	</div>
-</body>
 	<script type="text/javascript" src="./js/vue.js"></script>
+
+	</body>
 </html>

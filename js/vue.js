@@ -211,6 +211,12 @@ new Vue({
             }).error((error)=>{
                 this.$notify.error("something wrong in send message ...")
             })
+            this.resetFormData()
+        },
+        resetFormData() {
+            this.index.contact.left.inputs.forEach(v => v.bindValue = "");
+            this.index.contact.left.textarea.bindValue = "";
         }
+
     }
 })

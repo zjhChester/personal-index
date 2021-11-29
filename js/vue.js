@@ -208,7 +208,7 @@ new Vue({
                 data:{"key":"personal_page_index_message","jsonValue":JSON.stringify(messageBody)}
             }).then((res)=>{
                 this.$notify.success("thanks for your message!")
-            }).error((error)=>{
+            }).catch((error)=>{
                 this.$notify.error("something wrong in send message ...")
             })
             this.resetFormData()

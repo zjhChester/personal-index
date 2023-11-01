@@ -121,7 +121,7 @@ new Vue({
                     left: {
                         text: "Drop me a note",
                         method: "post",
-                        url: "https://common.zjhwork.xyz/keymaps",
+                        url: "/api/keymaps",
                         inputs: [{
                             showText: "Name:",
                             key: "name",
@@ -173,7 +173,7 @@ new Vue({
     },
     methods: {
         loadIndex() {
-             axios.get("https://common.zjhwork.xyz/keymaps/current-version?key=index")
+             axios.get("/api/keymaps/current-version?key=index")
                 .then(response => {
                     let indexFromNet = JSON.parse(response.data.jsonValue);
                     this.$notify.success("refresh！")
